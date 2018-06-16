@@ -22,12 +22,17 @@ app.get('/waterplants', function(req, res) {
     var options = {
 	pythonPath: '/usr/bin/python3.5'
     }
-    PythonShell.run('buttonLED.py', options, function (err) {
+    var pyshell = PythonShell.run('buttonLED.py', options, function (err) {
         if (err) throw err;
-        console.log('finished');
+        console.log('python script init');
     });
-    res.header("Access-Control-Allow-Origin", "*");
-    res.send({"data": "watering"});
+    pyshell.on('LED ON', function(message){
+        pyshell.end(function(err, code, signal) {
+	    if(err) throw err;
+		res.header("Acess-Control-Allow-Origin", "*");
+		res.send({"data": "watering"});
+	});
+    });
 });
 
 
