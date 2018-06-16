@@ -19,7 +19,7 @@ app.get('/', function(req, res){
 });
 
 app.get('/waterplants', function(req, res) {
-    PythonShell.run('my_script.py', function (err) {
+    PythonShell.run('buttonLED.py', function (err) {
         if (err) throw err;
         console.log('finished');
     });
