@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 var PythonShell = require('python-shell');
 
-const port = 3000;
+const port = 1337;
 
 var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,7 +19,10 @@ app.get('/', function(req, res){
 });
 
 app.get('/waterplants', function(req, res) {
-    PythonShell.run('buttonLED.py', function (err) {
+    var options = {
+	pythonPath: '/usr/bin/python3.5'
+    }
+    PythonShell.run('buttonLED.py', options, function (err) {
         if (err) throw err;
         console.log('finished');
     });
