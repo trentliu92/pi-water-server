@@ -3,6 +3,7 @@ const path = require('path');
 const request = require('request');
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
+var spawn = require('child_process').spawn;
 
 const port = 3000;
 
@@ -17,7 +18,8 @@ app.get('/', function(req, res){
     res.send("pi-server connected");
 });
 
- app.get('/waterplants', function(req, res){
+app.get('/waterplants', function(req, res) {
+    py = spawn('python', ['buttonLED.py']);
     res.header("Access-Control-Allow-Origin", "*");
     res.send({"data": "watering"});
 });
