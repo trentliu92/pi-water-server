@@ -3,7 +3,7 @@ const path = require('path');
 const request = require('request');
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
-var spawn = require('child_process').spawn;
+var PythonShell = require('python-shell');
 
 const port = 3000;
 
@@ -19,7 +19,10 @@ app.get('/', function(req, res){
 });
 
 app.get('/waterplants', function(req, res) {
-    py = spawn('python', ['buttonLED.py']);
+    PythonShell.run('my_script.py', function (err) {
+        if (err) throw err;
+        console.log('finished');
+    });
     res.header("Access-Control-Allow-Origin", "*");
     res.send({"data": "watering"});
 });
