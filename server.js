@@ -20,19 +20,21 @@ app.get('/', function(req, res){
 
 app.get('/waterplants', function(req, res) {
     var options = {
-	pythonPath: '/usr/bin/python3.5'
+	    pythonPath: '/usr/bin/python3.5'
     }
-    var pyshell = PythonShell.run('buttonLED.py', options, function (err) {
+    PythonShell.run('buttonLED.py', options, function (err, response) {
         if (err) throw err;
         console.log('python script init');
+        res.header("Acess-Control-Allow-Origin", "*");
+        res.send({"data": "watering"});
     });
-    pyshell.on('LED ON', function(message){
-        pyshell.end(function(err, code, signal) {
-	    if(err) throw err;
-		res.header("Acess-Control-Allow-Origin", "*");
-		res.send({"data": "watering"});
-	});
-    });
+    // pyshell.on('LED ON', function(message){
+    //     pyshell.end(function(err, code, signal) {
+    //         if(err) throw err;
+    //         res.header("Acess-Control-Allow-Origin", "*");
+    //         res.send({"data": "watering"});
+    //     });
+    // });
 });
 
 
