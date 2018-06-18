@@ -29,13 +29,11 @@ app.get('/waterplants', function(req, res) {
     });
     res.header("Acess-Control-Allow-Origin", "*");
     res.send({"data": "watering"});
-    // pyshell.on('LED ON', function(message){
-    //     pyshell.end(function(err, code, signal) {
-    //         if(err) throw err;
-    //         res.header("Acess-Control-Allow-Origin", "*");
-    //         res.send({"data": "watering"});
-    //     });
-    // });
+    pyshell.on('message', function(message){
+        if(message === "LED ON") {
+            console.log("LED ON");
+        }
+    });
 });
 
 
