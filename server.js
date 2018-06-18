@@ -25,9 +25,10 @@ app.get('/waterplants', function(req, res) {
     PythonShell.run('buttonLED.py', options, function (err, response) {
         if (err) throw err;
         console.log('python script init');
-        res.header("Acess-Control-Allow-Origin", "*");
-        res.send({"data": "watering"});
+        
     });
+    res.header("Acess-Control-Allow-Origin", "*");
+    res.send({"data": "watering"});
     // pyshell.on('LED ON', function(message){
     //     pyshell.end(function(err, code, signal) {
     //         if(err) throw err;
